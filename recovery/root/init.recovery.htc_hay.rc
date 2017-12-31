@@ -1,0 +1,21 @@
+on init
+	# Start QCE driver, needed to support MDTP in recovery
+    insmod /sbin/qcrypto_module.ko
+    # Load Tuxera exfat module
+    insmod /system/lib/modules/texfat.ko
+
+on boot
+    start chargeled
+
+service chargeled /sbin/chargeled
+    disabled
+    seclabel u:r:healthd:s0
+
+service detect_key /sbin/detect_key
+    disabled
+    seclabel u:r:healthd:s0
+    oneshot
+
+service offmode_charging /sbin/offmode_charging
+    disabled
+    seclabel u:r:healthd:s0
