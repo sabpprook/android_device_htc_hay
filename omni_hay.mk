@@ -12,6 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+
+# Sample: This is where we'd set a backup provider if we had one
+# $(call inherit-product, device/sample/products/backup_overlay.mk)
+
+# Get the prebuilt list of APNs
+$(call inherit-product, vendor/omni/config/cdma.mk)
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
@@ -19,12 +26,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
 
-# Time Zone data for Recovery
-PRODUCT_COPY_FILES += \
-    bionic/libc/zoneinfo/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
-
-PRODUCT_DEVICE := hay
 PRODUCT_NAME := omni_hay
+PRODUCT_DEVICE := hay
 PRODUCT_BRAND := htc
-PRODUCT_MODEL := HTC U11 EYEs
+PRODUCT_MODEL := HTC U11 eyes
 PRODUCT_MANUFACTURER := HTC

@@ -51,16 +51,19 @@ void vendor_load_properties()
     property_get_sdk23("ro.boot.mid", bootmid);
     property_get_sdk23("ro.boot.cid", bootcid);
 
-    property_set("ro.build.product", "htc_haydugl");
-    property_set("ro.product.model", "HTC U11 EYEs");
-
-    /*if (strstr(bootmid, "2Q4R10000")) {
+    if (strstr(bootmid, "2Q4R10000")) {
         property_set("ro.build.product", "htc_haydugl");
         property_set("ro.product.model", "HTC U11 EYEs");
-    } else {
-        property_set("ro.build.product", "htc_hayuhl");
+    } else if (strstr(bootmid, "2Q4R30000")) {
+    	property_set("ro.build.product", "htc_haydtwl");
         property_set("ro.product.model", "HTC U11 EYEs");
-    }*/
+    } else if (strstr(bootmid, "2Q4R40000")) {
+        property_set("ro.build.product", "htc_haydtwl");
+        property_set("ro.product.model", "HTC U11 EYEs");
+    } else {
+        property_set("ro.build.product", "htc_haydugl");
+        property_set("ro.product.model", "HTC U11 EYEs");
+    }
 
     set_props_from_build();
 

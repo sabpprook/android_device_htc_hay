@@ -2,12 +2,12 @@
 BOARD_VENDOR := htc
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8952
+TARGET_BOOTLOADER_BOARD_NAME := msm8952
 TARGET_NO_BOOTLOADER := true
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8952
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno510
 
 # Architecture
 TARGET_ARCH := arm64
@@ -24,7 +24,7 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.hardware=htc_hay cma=20M androidkey.dummy=1 androidboot.configfs=true androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.hardware=htc_hay cma=20M androidkey.dummy=1 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --second_offset 0x00f00000 --tags_offset 0x00000100 --board recovery:0
@@ -33,46 +33,31 @@ TARGET_PREBUILT_KERNEL := device/htc/$(TARGET_DEVICE)/kernel
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3791650816
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 469762048
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-TARGET_USERIMAGES_USE_EXT4 := true
-#TARGET_USERIMAGES_USE_F2FS := true
-
-# Recovery
-BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_HAS_NO_MISC_PARTITION := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_RECOVERY_SWIPE := true
-BOARD_SUPPRESS_SECURE_ERASE := true
-BOARD_USES_MMCUTILS := true
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Keymaster
 TARGET_HW_DISK_ENCRYPTION := true
 
+# Recovery
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+
 # TWRP Build Flags
 TW_THEME := portrait_hdpi
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 178
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_HAS_DOWNLOAD_MODE := true
+TW_NO_REBOOT_RECOVERY := true
 TW_INCLUDE_CRYPTO := true
 TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd
-#TW_INCLUDE_NTFS_3G := true
 TW_NO_EXFAT_FUSE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_RECOVERY_DEVICE_MODULES := chargeled
+TARGET_RECOVERY_DEVICE_MODULES := chargeled tzdata
 TW_INPUT_BLACKLIST := "hbtp_vm"
-
-# TWRP Debug Flags
-#TWRP_EVENT_LOGGING := true
-#TARGET_USES_LOGD := true
-#TWRP_INCLUDE_LOGCAT := true
-#TARGET_RECOVERY_DEVICE_MODULES += strace debuggerd
-#TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/strace $(TARGET_OUT_EXECUTABLES)/debuggerd64
-#TARGET_RECOVERY_DEVICE_MODULES += twrpdec
-#TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/twrpdec
-#TW_CRYPTO_SYSTEM_VOLD_DEBUG := true
+TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/usr/share/zoneinfo/tzdata
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
